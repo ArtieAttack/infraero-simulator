@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Simulador INFRAERO - Conclusão</title>
+  <link rel="stylesheet" href="css/modern-layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .campo-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .campo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.05) contrast(1.05) saturate(1.1);
+      animation: zoomEffect 45s infinite alternate ease-in-out;
+      z-index: 1;
+    }
+    
+    @keyframes zoomEffect {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.03); }
+    }
+    
+    /* Estilos simplificados sem as áreas */
+    .conclusao-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 100;
+      width: 90%;
+      max-width: 800px;
+    }
+    
+    .conclusao-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 60px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      animation: fadeIn 1s ease-out, floatUp 1.5s ease-out;
+    }
+    
+    .conclusao-card h1 {
+      margin: 0;
+      color: var(--primary-dark);
+      font-size: 2rem;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    
+    .conclusao-card h2 {
+      margin: 10px 0 20px;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+    
+    .conclusao-card p {
+      margin: 20px 0 0;
+      color: var(--secondary-color);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes floatUp {
+      from { transform: translateY(30px); }
+      to { transform: translateY(0); }
+    }
+    
+    /* Responsividade Mobile */
+    @media (max-width: 1024px) {
+      .conclusao-card {
+        padding: 40px 50px;
+        max-width: 90%;
+      }
+      
+      .conclusao-card h1 {
+        font-size: 1.8rem;
+      }
+      
+      .conclusao-card h2 {
+        font-size: 1.6rem;
+      }
+      
+      .conclusao-card p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .conclusao-card {
+        padding: 30px 40px;
+        width: 95%;
+        max-width: 95%;
+      }
+      
+      .conclusao-card h1 {
+        font-size: 1.6rem;
+        line-height: 1.3;
+      }
+      
+      .conclusao-card h2 {
+        font-size: 1.4rem;
+        margin: 15px 0;
+      }
+      
+      .conclusao-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 15px 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .conclusao-container {
+        width: 95%;
+        padding: 0 10px;
+      }
+      
+      .conclusao-card {
+        padding: 25px 20px;
+        margin: 10px;
+      }
+      
+      .conclusao-card h1 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+        margin-bottom: 10px;
+      }
+      
+      .conclusao-card h2 {
+        font-size: 1.2rem;
+        margin: 10px 0 15px;
+      }
+      
+      .conclusao-card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 10px 0;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .conclusao-card {
+        padding: 20px 15px;
+      }
+      
+      .conclusao-card h1 {
+        font-size: 1.3rem;
+      }
+      
+      .conclusao-card h2 {
+        font-size: 1.1rem;
+      }
+      
+      .conclusao-card p {
+        font-size: 0.85rem;
+      }
+    }
+    
+    @media (max-width: 320px) {
+      .conclusao-card {
+        padding: 15px 10px;
+      }
+      
+      .conclusao-card h1 {
+        font-size: 1.2rem;
+      }
+      
+      .conclusao-card h2 {
+        font-size: 1rem;
+      }
+      
+      .conclusao-card p {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+      <div class="campo-container">
+        <img src="assets/images/campo.jpg" alt="Campo de operações" class="bg-image">
+        
+        <!-- Overlay com plano preto suave -->
+        <div class="overlay"></div>
+    
+        <div class="conclusao-container">
+          <div class="conclusao-card">
+            <h1>Parabéns por concluir o simulador!</h1>
+            <h2>Você completou todas as trilhas</h2>
+            <p>Você acaba de reforçar conhecimentos essenciais sobre o atendimento em emergências aeroportuárias. Lembre-se: agir com preparo e clareza pode salvar vidas.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar se o usuário completou todas as áreas
+      const simuladorCompleto = localStorage.getItem('simuladorCompleto');
+      const areasVisitadas = JSON.parse(localStorage.getItem('areasVisitadas')) || [];
+      const trilhasNecessarias = [1, 2, 3, 4, 5]; // coleta, triagem, estabilizacao, transporte, outros
+      
+      // Verificar se todas as trilhas necessárias foram visitadas/completadas
+      const todasTrilhasCompletas = trilhasNecessarias.every(trilha => areasVisitadas.includes(trilha));
+      
+      if (!simuladorCompleto && !todasTrilhasCompletas) {
+        console.log('Acesso não autorizado à página final. Redirecionando para o mapa...');
+        window.location.href = 'mapa.html';
+        return;
+      }
+      
+      // Adicionar botão para recomeçar o simulador
+      const conclusaoCard = document.querySelector('.conclusao-card');
+      if (conclusaoCard) {
+        const botaoContainer = document.createElement('div');
+        botaoContainer.style.marginTop = '30px';
+        
+        const botaoRecomecar = document.createElement('a');
+        botaoRecomecar.innerHTML = 'Recomeçar Simulador';
+        botaoRecomecar.className = 'btn btn-lg';
+        botaoRecomecar.style.display = 'inline-block';
+        botaoRecomecar.style.cursor = 'pointer';
+        
+        // Adicionar responsividade ao botão
+        if (window.innerWidth <= 480) {
+          botaoRecomecar.style.fontSize = '0.9rem';
+          botaoRecomecar.style.padding = '10px 20px';
+        }
+        
+        botaoRecomecar.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Limpar dados salvos
+          localStorage.removeItem('areasVisitadas');
+          localStorage.removeItem('areasDesbloqueadas');
+          localStorage.removeItem('simuladorCompleto');
+          
+          // Redirecionar para a página inicial
+          window.location.href = 'index.html';
+        });
+        
+        botaoContainer.appendChild(botaoRecomecar);
+        conclusaoCard.appendChild(botaoContainer);
+      }
+      
+      // Adicionar suporte para orientação
+      function handleOrientationChange() {
+        setTimeout(() => {
+          const conclusaoCard = document.querySelector('.conclusao-card');
+          if (conclusaoCard) {
+            conclusaoCard.style.transition = 'all 0.3s ease';
+          }
+        }, 100);
+      }
+      
+      window.addEventListener('orientationchange', handleOrientationChange);
+      window.addEventListener('resize', handleOrientationChange);
+    });
+  </script>
+</body>
+</html>

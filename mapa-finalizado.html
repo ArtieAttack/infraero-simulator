@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Mapa Finalizado - Simulador Infraero</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/mapa-finalizado.css" />
+  </head>
+  <body>
+    <div class="mapa-container mapa-finalizado">
+      <!-- Imagem de fundo colorida sem grayscale -->
+      <img
+        src="assets/images/campo.jpg"
+        alt="Mapa do Simulador Finalizado"
+        class="mapa-img mapa-colorida"
+      />
+
+      <!-- Botões interativos das áreas -->
+      <div class="areas-finalizadas">
+        <!-- Botão Área de Coleta -->
+        <button
+          class="botao-area area-coleta-btn"
+          data-area="coleta"
+          data-trilha="1"
+          style="top: 8.8%; left: 13.2%; transform: translate(-50%, -50%)"
+        >
+          <span class="botao-area-texto">Área de Coleta</span>
+        </button>
+
+        <!-- Botão Área de Triagem -->
+        <button
+          class="botao-area area-triagem-btn"
+          data-area="triagem"
+          data-trilha="2"
+          style="top: 28.8%; left: 23.8%; transform: translate(-50%, -50%)"
+        >
+          <span class="botao-area-texto">Área de Triagem</span>
+        </button>
+
+        <!-- Botão Área de Estabilização -->
+        <button
+          class="botao-area area-estabilizacao-btn"
+          data-area="estabilizacao"
+          data-trilha="3"
+          style="top: 51.3%; left: 46.9%; transform: translate(-50%, -50%)"
+        >
+          <span class="botao-area-texto">Área de Estabilização</span>
+        </button>
+
+        <!-- Botão Área de Transporte -->
+        <button
+          class="botao-area area-transporte-btn"
+          data-area="transporte"
+          data-trilha="4"
+          style="top: 27.9%; left: 81.3%; transform: translate(-50%, -50%)"
+        >
+          <span class="botao-area-texto">Área de Transporte</span>
+        </button>
+
+        <!-- Botão Outras Áreas -->
+        <button
+          class="botao-area area-outros-btn"
+          data-area="outros"
+          data-trilha="5"
+          style="top: 84.3%; left: 54.6%; transform: translate(-50%, -50%)"
+        >
+          <span class="botao-area-texto">Outras Áreas</span>
+        </button>
+      </div>
+
+      <!-- Indicador de Zoom -->
+      <div class="zoom-indicator" id="zoomIndicator">Focalizando área...</div>
+
+      <!-- Botão Finalizar Simulador (lado direito) -->
+      <div class="finalizar-simulador-controls">
+        <button
+          type="button"
+          class="btn-finalizar-simulador"
+          id="btnFinalizarSimulador"
+        >
+          FINALIZAR SIMULADOR
+        </button>
+      </div>
+
+      <!-- Painel lateral de informações (EXATAMENTE igual ao mapa.html) -->
+      <div class="painel-trilha" id="painelTrilha">
+        <div class="painel-header">
+          <h2 id="trilhaTitulo">Área de Triagem</h2>
+          <button type="button" class="btn-fechar" id="fecharPainel"></button>
+        </div>
+
+        <div class="painel-conteudo">
+          <div class="trilha-info">
+            <div class="info-item">
+              <h3>Objetivo</h3>
+              <p id="trilhaObjetivo">
+                Classificar vítimas de acordo com a gravidade de suas lesões.
+              </p>
+            </div>
+
+            <div class="info-item">
+              <div class="trilha-imagem">
+                <img
+                  id="trilhaImagem"
+                  src="assets/images/campo.jpg"
+                  alt="Imagem da área"
+                />
+              </div>
+            </div>
+
+            <div class="info-item">
+              <h3>Descrição</h3>
+              <p id="trilhaDescricao">
+                A Área de Triagem está localizada a aproximadamente 90 metros do
+                acidente, levando em consideração a direção do vento para evitar
+                a contaminação. É aqui que as vítimas são classificadas de
+                acordo com a gravidade de suas lesões. Em casos de insegurança
+                no local, a triagem pode ser adiada.
+              </p>
+            </div>
+          </div>
+
+          <div class="painel-acoes">
+            <button type="button" class="btn-assistir-video" id="assistirVideo">
+              ASSISTIR VÍDEO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Vídeo (EXATAMENTE igual ao mapa.html) -->
+    <div id="modalVideo" class="modal-video">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h3 id="videoTitulo">Vídeo Educativo</h3>
+          <button
+            type="button"
+            class="btn-fechar-modal"
+            id="btnFecharModalVideo"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="videoContainer" class="video-container">
+            <video id="videoPlayer" controls style="display: none">
+              <source src="" type="video/mp4" />
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
+            <iframe
+              id="youtubePlayer"
+              width="100%"
+              src=""
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="display: none"
+            >
+            </iframe>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn-iniciar-simulado"
+            id="btnIniciarSimulado"
+          >
+            INICIAR SIMULADO
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Simulado (EXATAMENTE igual ao mapa.html) -->
+    <div id="modalSimulado" class="modal-simulado">
+      <div class="simulado-conteudo">
+        <div class="simulado-header">
+          <h3 id="simuladoTitulo">Simulado</h3>
+          <div class="progresso">
+            <span id="questaoAtual">1</span>/<span id="totalQuestoes">5</span>
+          </div>
+          <button
+            type="button"
+            class="btn-fechar-simulado"
+            id="btnFecharSimuladoHeader"
+          ></button>
+        </div>
+        <div class="simulado-body">
+          <div class="questao" id="questaoContainer">
+            <h4>Questão <span id="numeroQuestao">1</span></h4>
+            <div class="pergunta" id="perguntaTexto"></div>
+            <div class="opcoes" id="opcoesContainer"></div>
+          </div>
+          <div class="resultado" id="resultadoContainer" style="display: none">
+            <div class="pontuacao" id="pontuacaoFinal"></div>
+          </div>
+        </div>
+        <div class="simulado-footer">
+          <div class="navegacao-esquerda">
+            <button
+              type="button"
+              class="btn-navegacao btn-anterior"
+              id="btnAnterior"
+              disabled
+            >
+              Anterior
+            </button>
+          </div>
+          <div class="navegacao-direita">
+            <button
+              type="button"
+              class="btn-navegacao btn-proximo"
+              id="btnProximo"
+            >
+              Próximo
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-finalizar"
+              id="btnFinalizar"
+              style="display: none"
+            >
+              Finalizar
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-proxima-area"
+              id="btnProximaArea"
+              style="display: none"
+            >
+              Próxima Área
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-tente-novamente"
+              id="btnTenteNovamente"
+              style="display: none"
+            >
+              Tente Novamente
+            </button>
+            <button
+              type="button"
+              class="btn-fechar-texto"
+              id="btnFecharSimulado"
+              style="display: none"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/mapa-finalizado.js"></script>
+  </body>
+</html>

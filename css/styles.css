@@ -1,0 +1,3879 @@
+/* =============================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* =============================================
+   CONTAINER DA TELA INICIAL
+   ============================================= */
+.tela-inicial {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Botão para voltar à página inicial */
+.btn-voltar-inicio {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.btn-voltar-inicio:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   IMAGEM DE FUNDO RESPONSIVA
+   ============================================= */
+.bg-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* =============================================
+   OVERLAY CENTRALIZADO
+   ============================================= */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* =============================================
+   TÍTULO AMARELO BONITO
+   ============================================= */
+h1 {
+  color: #ffd700;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
+  letter-spacing: 2px;
+}
+
+/* =============================================
+   BOTÃO VERMELHO ESTILIZADO
+   ============================================= */
+button#startBtn {
+  background: #dc3545;
+  color: white;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+  transition: all 0.3s ease;
+}
+
+button#startBtn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
+
+button#startBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(220, 53, 69, 0.4);
+}
+
+/* =============================================
+   ESTILOS PARA ÁREAS DO MAPA
+   ============================================= */
+.area {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.area img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.7);
+  transition: all 0.5s ease;
+}
+
+.area.desbloqueada img {
+  filter: grayscale(0%) brightness(1);
+}
+
+.area.atual img {
+  filter: grayscale(0%) brightness(1.2) saturate(1.3);
+}
+
+.area.completa img {
+  filter: grayscale(0%) brightness(1);
+}
+
+.area:not(.desbloqueada) {
+  pointer-events: none;
+}
+
+/* Posicionamento das áreas */
+.area.area-1 {
+  top: 20%;
+  left: 15%;
+  width: 120px;
+  height: 120px;
+}
+
+.area.area-2 {
+  top: 35%;
+  left: 40%;
+  width: 120px;
+  height: 120px;
+}
+
+.area.area-3 {
+  top: 55%;
+  left: 25%;
+  width: 120px;
+  height: 120px;
+}
+
+.area.area-4 {
+  top: 25%;
+  right: 20%;
+  width: 120px;
+  height: 120px;
+}
+
+.area.area-5 {
+  bottom: 20%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+/* Status das áreas */
+.area-status {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  z-index: 101;
+}
+
+.area-status.bloqueada {
+  background: #6c757d;
+}
+
+.area-status.desbloqueada {
+  background: #007bff;
+}
+
+.area-status.atual {
+  background: #ffc107;
+  color: #000;
+}
+
+.area-status.completa {
+  background: #28a745;
+}
+
+/* Hover das áreas */
+.area:hover .area-hover {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+.area-hover {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 102;
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Títulos das áreas */
+.area-titulo {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  z-index: 102;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* =============================================
+   ESTILOS PARA O MAPA
+   ============================================= */
+.mapa-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.mapa-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(90%) blur(0px) brightness(1);
+  transition: all 1s ease;
+  z-index: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+.mapa-img.ativo {
+  filter: grayscale(90%) blur(0px) brightness(1);
+}
+
+.mapa-overview .mapa-img {
+  cursor: default;
+  transition: filter 1s ease;
+  pointer-events: none;
+}
+
+/* Overlay para centralizar botão */
+.mapa-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  transition: all 0.8s ease;
+}
+
+.mapa-overlay.esconder {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  display: none !important;
+}
+
+/* Overlay de spotlight para destacar área desbloqueada */
+.spotlight-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 5;
+  opacity: 0;
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.spotlight-overlay.ativo {
+  opacity: 1;
+}
+
+/* =============================================
+   BOTÃO INICIAR TRILHA
+   ============================================= */
+.btn-iniciar-trilha {
+  background: #28a745;
+  color: white;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: bold;
+  padding: 1.5rem 3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-iniciar-trilha:hover {
+  background: #20c997;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.6);
+}
+
+.btn-iniciar-trilha:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5);
+}
+
+/* =============================================
+   ANIMAÇÕES DE ENTRADA
+   ============================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.overlay {
+  animation: fadeInUp 1s ease-out;
+}
+
+h1 {
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+button#startBtn {
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* =============================================
+   PAINEL LATERAL
+   ============================================= */
+.painel-trilha {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  height: 100vh;
+  background: #f8f9fa;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.4s ease;
+  overflow-y: auto;
+}
+
+.painel-trilha.ativo {
+  right: 0;
+}
+
+/* Header do painel */
+.painel-header {
+  background: #007bff;
+  color: white;
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.painel-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  flex: 1;
+}
+
+/* Conteúdo do painel */
+.painel-conteudo {
+  padding: 1.8rem;
+  line-height: 1.8;
+}
+
+.trilha-info {
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  margin-bottom: 2rem;
+}
+
+.info-item h3 {
+  color: #007bff;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+.info-item p {
+  color: #495057;
+  line-height: 1.8;
+  margin: 0;
+  font-size: 1rem;
+  text-align: justify;
+  text-justify: inter-word;
+  margin-bottom: 1rem;
+}
+
+.info-item p:last-child {
+  margin-bottom: 0;
+}
+
+/* Formatação especial para descrições longas */
+.info-item p strong {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Melhorar espaçamento entre parágrafos */
+.info-item p + p {
+  margin-top: 1.2rem;
+}
+
+/* Formatação especial para emojis e símbolos */
+.info-item p:contains("🔴"),
+.info-item p:contains("🟡"),
+.info-item p:contains("🟢") {
+  margin-bottom: 0.8rem;
+}
+
+/* Estilo para listas de prioridades */
+.info-item p span[style*="color"] {
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Destaque para informações importantes */
+.info-item p:contains("Atenção"),
+.info-item p:contains("importante"),
+.info-item p:contains("essencial") {
+  background: rgba(0, 123, 255, 0.05);
+  padding: 1rem;
+  border-left: 4px solid #007bff;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+  font-weight: 500;
+}
+
+/* Estilos para a imagem da trilha */
+.trilha-imagem {
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.trilha-imagem img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 200px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  object-fit: cover;
+}
+
+.trilha-imagem img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ações do painel */
+.painel-acoes {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.btn-assistir-video {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-assistir-video:hover {
+  background: #20c997;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.icone-play {
+  font-size: 1.2rem;
+}
+
+/* Cores específicas por trilha */
+.painel-trilha.trilha-1 .painel-header {
+  background: #007bff;
+}
+
+.painel-trilha.trilha-1 .info-item h3 {
+  color: #007bff;
+}
+
+.painel-trilha.trilha-2 .painel-header {
+  background: #28a745;
+}
+
+.painel-trilha.trilha-2 .info-item h3 {
+  color: #28a745;
+}
+
+.painel-trilha.trilha-3 .painel-header {
+  background: #dc3545;
+}
+
+.painel-trilha.trilha-3 .info-item h3 {
+  color: #dc3545;
+}
+
+.painel-trilha.trilha-4 {
+  right: auto;
+  left: -100%;
+}
+
+.painel-trilha.trilha-4.ativo {
+  left: 0;
+}
+
+.painel-trilha.trilha-4 .painel-header {
+  background: #fd7e14;
+}
+
+.painel-trilha.trilha-4 .info-item h3 {
+  color: #fd7e14;
+}
+
+.painel-trilha.trilha-5 {
+  right: auto;
+  left: -100%;
+}
+
+.painel-trilha.trilha-5.ativo {
+  left: 0;
+}
+
+.painel-trilha.trilha-5 .painel-header {
+  background: #6f42c1;
+}
+
+.painel-trilha.trilha-5 .info-item h3 {
+  color: #6f42c1;
+}
+
+/* =============================================
+   MODAIS
+   ============================================= */
+
+/* Modal de vídeo */
+.modal-video {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-video.ativo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-conteudo {
+  background: white;
+  border-radius: 15px;
+  padding: 0;
+  width: 90%;
+  max-width: 800px; /* Voltando ao tamanho original */
+  max-height: 85vh; /* Reduzido para dar mais espaço */
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin: 1rem; /* Margem para evitar tocar as bordas */
+}
+
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  color: white;
+  border-radius: 15px 15px 0 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Estilizações específicas do vídeo - removido para evitar conflitos */
+.modal-body video {
+  /* Removido - agora controlado pelo .video-container */
+}
+
+.modal-body {
+  /* Agora controlado pela nova regra acima */
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+}
+
+.btn-iniciar-simulado {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-iniciar-simulado:hover {
+  background: #20c997;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.video-header {
+  background: #007bff;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.video-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.video-container {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Modal do simulado */
+.modal-simulado {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-simulado.ativo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.simulado-conteudo {
+  background: white;
+  border-radius: 20px;
+  padding: 0;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.simulado-header {
+  background: #007bff;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.simulado-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  flex: 1;
+}
+
+.progresso {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.progresso-texto {
+  font-weight: bold;
+}
+
+.simulado-body {
+  padding: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.simulado-body.resultado-compacto {
+  padding: 1.5rem;
+}
+
+.questao-container {
+  margin-bottom: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.questao-numero {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+.questao-pergunta {
+  font-size: 1.15rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
+  color: #2c3e50;
+  font-weight: 500;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.opcoes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.opcao {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.opcao:hover {
+  background: #e3f2fd;
+  border-color: #007bff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.opcao input[type="radio"] {
+  margin: 0;
+  margin-top: 2px;
+  transform: scale(1.3);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.opcao label {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 400;
+  color: #495057;
+  margin: 0;
+  padding: 0;
+}
+
+.opcao-texto {
+  cursor: pointer;
+  line-height: 1.5;
+  flex: 1;
+  display: block;
+  user-select: none;
+}
+
+.opcao input[type="radio"]:checked + .opcao-texto {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.opcao:has(input[type="radio"]:checked) {
+  border-color: #007bff;
+  background: #e7f3ff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+/* Feedback visual melhorado para estados */
+.opcao:active {
+  transform: translateY(-1px);
+}
+
+.opcao input[type="radio"]:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Estilo para opções não selecionadas */
+.opcao:not(:has(input[type="radio"]:checked)) {
+  background: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+.opcao:not(:has(input[type="radio"]:checked)):hover {
+  background: #e3f2fd;
+  border-color: #007bff;
+}
+
+/* Melhorar a responsividade em dispositivos touch */
+@media (max-width: 768px) {
+  .opcao {
+    padding: 1rem;
+    margin-bottom: 0.6rem;
+    min-height: 60px;
+    align-items: center;
+  }
+  
+  .opcao input[type="radio"] {
+    transform: scale(1.5);
+  }
+  
+  .opcao-texto {
+    font-size: 0.95rem;
+  }
+}
+
+/* Melhorias do header do simulado */
+.simulado-header .btn-fechar-simulado {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-left: 1rem;
+}
+
+.simulado-header .btn-fechar-simulado:before {
+  content: "×";
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  display: block;
+}
+
+.simulado-header .btn-fechar-simulado:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Melhorar o botão de fechar existente */
+.painel-header .btn-fechar {
+  position: relative;
+  top: auto;
+  right: auto;
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-size: 18px !important;
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  margin-left: 1rem;
+}
+
+.painel-header .btn-fechar:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Melhorar botão de fechar modal */
+.btn-fechar-modal {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: none;
+  color: white !important;
+  font-size: 18px !important;
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.btn-fechar-modal:before {
+  content: "×";
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  display: block;
+}
+
+.btn-fechar-modal:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.icone-simulado:before {
+  /* content: "🎯"; */
+  margin-right: 0.5rem;
+}
+
+/* =============================================
+   ZOOM INTERATIVO E GESTOS DE TOQUE
+   ============================================= */
+
+/* Zoom controls gerais */
+.zoom-controls {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+.zoom-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  touch-action: manipulation;
+}
+
+.zoom-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.zoom-btn:active {
+  transform: scale(0.95);
+}
+
+/* Suporte para gestos de toque no mapa */
+.mapa-container {
+  touch-action: pan-x pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.mapa-img {
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Indicador de zoom */
+.zoom-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  z-index: 100;
+  display: none;
+}
+
+.zoom-indicator.ativo {
+  display: block;
+}
+
+/* Melhorias para gestos de pinch */
+@media (pointer: coarse) {
+  .mapa-container {
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+  
+  .areas-sobrepostas {
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+}
+
+/* Feedback visual para áreas tocáveis */
+.area-interativa {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.area-interativa:active {
+  transform: scale(0.98);
+}
+
+/* Melhorias para o painel em touch */
+.painel-trilha {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
+
+/* =============================================
+   ANIMAÇÕES
+   ============================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.area.atual {
+  animation: pulsar 2s infinite;
+}
+
+@keyframes zoomInArea {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.5) translate(var(--zoom-x, 0), var(--zoom-y, 0));
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* =============================================
+   MELHORIAS GERAIS DE LAYOUT
+   ============================================= */
+
+/* Garantir que o conteúdo não quebre o layout */
+.modal-conteudo,
+.simulado-conteudo {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Permite que o flex child encolha */
+}
+
+.modal-body,
+.simulado-body {
+  flex: 1;
+  min-height: 0; /* Permite que o flex child encolha */
+  overflow-y: auto;
+}
+
+/* Melhorias para scroll suave */
+.simulado-body {
+  scroll-behavior: smooth;
+}
+
+/* Melhorias para botões de navegação */
+.navegacao-questoes {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-questao {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  background: white;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  touch-action: manipulation;
+}
+
+.btn-questao:hover {
+  background: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-questao.ativa {
+  background: #007bff;
+  color: white;
+}
+
+.btn-questao.respondida {
+  background: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+/* Melhorias para loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+  .mapa-img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .painel-trilha {
+    width: 420px;
+    max-width: 45%;
+  }
+
+  .painel-trilha.trilha-5 {
+    left: -420px;
+  }
+
+  .btn-area {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* =============================================
+   MELHORIAS PARA VÍDEOS EM MOBILE
+   ============================================= */
+
+/* Vídeo responsivo */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  border-radius: 10px;
+  margin: 0 auto; /* Centralizar o container */
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Modal body ajustado para vídeos */
+.modal-body {
+  padding: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  text-align: center; /* Centraliza o conteúdo */
+}
+
+/* Modal body video container */
+.modal-body .video-container {
+  position: relative;
+  width: 85%; /* Não ocupa toda a largura */
+  max-width: 600px; /* Tamanho máximo controlado */
+  height: 0;
+  padding-bottom: 47.8%; /* Aspect ratio 16:9 ajustado para o tamanho menor */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Estilos específicos para players no modal */
+.modal-body #videoPlayer,
+.modal-body #youtubePlayer {
+  border-radius: 12px;
+  box-shadow: none; /* Remove shadow individual pois o container já tem */
+}
+
+/* Melhorias para vídeo em mobile */
+@media (max-width: 768px) {
+  .video-container {
+    padding-bottom: 56.25%;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+  .video-container iframe,
+  .video-container video {
+    border-radius: 8px;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-body .video-container {
+    width: 95%; /* Maior em mobile para aproveitar melhor o espaço */
+    max-width: none;
+    padding-bottom: 53.4%; /* Aspect ratio ajustado */
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-conteudo {
+    width: 95%;
+    max-height: 90vh;
+    margin: 0.5rem;
+  }
+
+  .video-header {
+    padding: 0.8rem 1rem;
+  }
+
+  .video-header h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container {
+    padding-bottom: 56.25%;
+    border-radius: 6px;
+  }
+
+  .video-header {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .video-header h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Melhorias para fullscreen video */
+.video-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 1000;
+  display: none;
+}
+
+.video-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.video-screen.active {
+  display: block;
+}
+
+/* Controles de vídeo customizados para mobile */
+@media (max-width: 768px) {
+  .video-screen video::-webkit-media-controls {
+    display: flex !important;
+  }
+
+  .video-screen video::-webkit-media-controls-panel {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .video-screen video::-webkit-media-controls-play-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+  }
+}
+
+/* Tablet responsivo */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1.5px;
+    padding: 0 1rem;
+  }
+
+  button#startBtn {
+    font-size: 1rem;
+    padding: 0.75rem 1.4rem;
+    min-height: 44px;
+    max-width: 280px;
+    width: 90%;
+  }
+
+  .btn-area {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    min-height: 40px;
+  }
+
+  .mapa-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .mapa-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Melhorias para o painel lateral em tablet */
+  .painel-trilha {
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    top: 0;
+    right: -85%;
+    transition: right 0.3s ease;
+  }
+
+  .painel-trilha.ativo {
+    right: 0;
+  }
+
+  .painel-trilha.trilha-4,
+  .painel-trilha.trilha-5 {
+    left: -85%;
+    right: auto;
+    transition: left 0.3s ease;
+  }
+
+  .painel-trilha.trilha-4.ativo,
+  .painel-trilha.trilha-5.ativo {
+    left: 0;
+  }
+
+  /* Áreas interativas ajustadas */
+  .areas-sobrepostas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+
+  .area-interativa {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .area-interativa:hover {
+    transform: scale(1.05);
+  }
+
+  .area-hover {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .area-nome {
+    font-size: 0.9rem;
+  }
+
+  .btn-entrar-trilha {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Modal responsivo para tablet */
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 95%;
+    max-width: 500px;
+    margin: 1rem auto;
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+
+  /* Melhorias específicas para o modal do simulado em tablet */
+  .simulado-header {
+    padding: 1rem 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1.2rem;
+    flex: 1;
+  }
+
+  .simulado-body {
+    padding: 1.5rem;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  .questao-pergunta {
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .opcao {
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 8px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .opcao-texto {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .btn-navegacao {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .simulado-footer {
+    padding: 1.2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Responsividade para imagem da trilha em tablet */
+  .trilha-imagem img {
+    max-width: 280px;
+    max-height: 180px;
+    border-radius: 8px;
+  }
+
+  .caixas-stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .area {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .area-status {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  /* Melhorias para o zoom e pan em tablet */
+  .zoom-controls {
+    bottom: 80px;
+    right: 20px;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .zoom-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+}
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+    padding: 0 0.5rem;
+  }
+
+  button#startBtn {
+    font-size: 0.85rem;
+    padding: 0.65rem 1.2rem;
+    min-height: 42px;
+    max-width: 260px;
+    width: 95%;
+  }
+
+  .btn-area {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.65rem;
+    min-height: 38px;
+  }
+
+  .zoom-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .mapa-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .mapa-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Melhorias para o painel lateral em mobile */
+  .painel-trilha {
+    width: 95%;
+    max-width: 350px;
+    height: 100vh;
+    top: 0;
+    right: -95%;
+    transition: right 0.3s ease;
+    border-radius: 0;
+  }
+
+  .painel-trilha.ativo {
+    right: 0;
+  }
+
+  .painel-trilha.trilha-4,
+  .painel-trilha.trilha-5 {
+    left: -95%;
+    right: auto;
+    transition: left 0.3s ease;
+  }
+
+  .painel-trilha.trilha-4.ativo,
+  .painel-trilha.trilha-5.ativo {
+    left: 0;
+  }
+
+  /* Melhorias para áreas interativas em mobile */
+  .areas-sobrepostas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+
+  .area-interativa {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .area-interativa:hover {
+    transform: scale(1.02);
+  }
+
+  .area-hover {
+    padding: 0.7rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  .area-nome {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-entrar-trilha {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  /* Melhorias específicas para o modal do simulado em mobile */
+  .simulado-conteudo {
+    width: 98%;
+    max-width: none;
+    margin: 0.5rem auto;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .simulado-header {
+    padding: 0.8rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1.1rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .progresso {
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .simulado-body {
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .questao-numero {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .questao-pergunta {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .opcoes-container {
+    gap: 0.6rem;
+  }
+
+  .opcao {
+    padding: 0.8rem;
+    gap: 0.6rem;
+    border-radius: 8px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .opcao-texto {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .btn-navegacao {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  .simulado-footer {
+    padding: 0.8rem;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  /* Responsividade para imagem da trilha em mobile */
+  .trilha-imagem img {
+    max-width: 250px;
+    max-height: 150px;
+    border-radius: 6px;
+  }
+
+  .navegacao-questoes {
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Garantir que o modal seja sempre acessível */
+  .modal-simulado.ativo {
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Melhorar botão de fechar no header para mobile */
+  .simulado-header .btn-fechar-simulado {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .area {
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  .area-status {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  /* Melhorias para o zoom em mobile */
+  .zoom-controls {
+    bottom: 20px;
+    right: 20px;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .zoom-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+    border-radius: 50%;
+    touch-action: manipulation;
+  }
+
+  /* Botão voltar melhorado */
+  .btn-voltar-inicio {
+    top: 20px;
+    left: 20px;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    z-index: 200;
+  }
+}
+
+/* =============================================
+   RESPONSIVIDADE PARA TELAS MUITO PEQUENAS
+   ============================================= */
+@media (max-width: 360px) {
+  /* Ajustes para telas muito pequenas */
+  h1 {
+    font-size: clamp(1.3rem, 7vw, 1.8rem);
+    margin-bottom: 1rem;
+    padding: 0 0.3rem;
+  }
+
+  button#startBtn {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.1rem;
+    min-height: 40px;
+    max-width: 240px;
+    width: 98%;
+  }
+
+  .mapa-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .simulado-conteudo {
+    width: 98%;
+    margin: 0.25rem auto;
+    max-height: 98vh;
+    border-radius: 8px;
+  }
+
+  .simulado-header {
+    padding: 0.6rem 0.8rem;
+    min-height: auto;
+  }
+
+  .simulado-header h3 {
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  .progresso {
+    font-size: 0.8rem;
+    gap: 0.3rem;
+  }
+
+  .simulado-body {
+    padding: 0.8rem;
+    max-height: 55vh;
+  }
+
+  .questao-numero {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .questao-pergunta {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .opcoes-container {
+    gap: 0.4rem;
+  }
+
+  .opcao {
+    padding: 0.6rem;
+    gap: 0.4rem;
+    border-radius: 6px;
+    min-height: 44px;
+  }
+
+  .opcao-texto {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .simulado-footer {
+    padding: 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .navegacao-questoes {
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-navegacao {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    min-height: 40px;
+  }
+
+  /* Zoom controls pequenos */
+  .zoom-controls {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .zoom-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  /* Área interativa pequena */
+  .area-hover {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  .area-nome {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .btn-entrar-trilha {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+    min-height: 40px;
+  }
+
+  /* Garantir scroll suave em telas pequenas */
+  .simulado-body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .simulado-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+  }
+
+  .simulado-body::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 2px;
+  }
+
+  .simulado-body::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+
+  .area {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .area-status {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+}
+
+/* Telas extra pequenas */
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  button#startBtn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    min-height: 36px;
+  }
+
+  .simulado-conteudo {
+    width: 100%;
+    margin: 0;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .simulado-header {
+    padding: 0.5rem 0.7rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .simulado-body {
+    padding: 0.7rem;
+    max-height: 50vh;
+  }
+
+  .questao-pergunta {
+    font-size: 0.9rem;
+  }
+
+  .opcao {
+    padding: 0.5rem;
+    min-height: 40px;
+  }
+
+  .opcao-texto {
+    font-size: 0.8rem;
+  }
+
+  .btn-navegacao {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
+    min-height: 36px;
+  }
+
+  .zoom-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+
+  .area {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .area-status {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+/* =============================================
+   MELHORIAS GERAIS DE ACESSIBILIDADE
+   ============================================= */
+@media (max-height: 600px) {
+  /* Para telas com pouca altura */
+  .simulado-conteudo {
+    max-height: 98vh;
+    margin: 0.5rem auto;
+  }
+
+  .simulado-body {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .simulado-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .simulado-footer {
+    padding: 0.6rem;
+  }
+
+  .questao-pergunta {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .opcao {
+    padding: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media (max-height: 500px) {
+  /* Para telas com altura muito reduzida */
+  .simulado-conteudo {
+    max-height: 98vh;
+    margin: 0.25rem auto;
+  }
+
+  .simulado-body {
+    max-height: 40vh;
+    padding: 0.6rem;
+  }
+
+  .simulado-header {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .simulado-footer {
+    padding: 0.5rem;
+  }
+
+  .btn-navegacao {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .questao-pergunta {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .opcao {
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+/* =============================================
+   MELHORIAS PARA DISPOSITIVOS TOUCH E ORIENTAÇÃO
+   ============================================= */
+
+/* Melhorar área de toque dos botões */
+.btn-navegacao,
+.btn-simulado,
+.opcao,
+.btn-entrar-trilha,
+.zoom-btn {
+  min-height: 44px; /* Padrão de acessibilidade para toque */
+  touch-action: manipulation; /* Melhorar responsividade do toque */
+}
+
+/* Melhorias para orientação landscape em mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .simulado-conteudo {
+    width: 95%;
+    max-width: 600px;
+    max-height: 95vh;
+    margin: 0.5rem auto;
+  }
+
+  .simulado-body {
+    max-height: 65vh;
+    padding: 1rem;
+  }
+
+  .simulado-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .simulado-footer {
+    padding: 0.6rem;
+  }
+
+  .navegacao-questoes {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .questao-pergunta {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .opcao {
+    padding: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Ajustar painel lateral em landscape */
+  .painel-trilha {
+    width: 60%;
+    max-width: 450px;
+  }
+
+  .painel-trilha.trilha-4,
+  .painel-trilha.trilha-5 {
+    left: -60%;
+  }
+
+  .painel-trilha.trilha-4.ativo,
+  .painel-trilha.trilha-5.ativo {
+    left: 0;
+  }
+
+  /* Zoom controls em landscape */
+  .zoom-controls {
+    bottom: 20px;
+    right: 20px;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+/* Melhorias específicas para iPhone SE e dispositivos similares */
+@media (max-width: 375px) and (max-height: 667px) {
+  .simulado-conteudo {
+    max-height: 96vh;
+    margin: 0.5rem auto;
+  }
+
+  .simulado-body {
+    max-height: 58vh;
+  }
+
+  .questao-pergunta {
+    font-size: 0.95rem;
+  }
+
+  .opcao {
+    padding: 0.7rem;
+    min-height: 48px;
+  }
+
+  .btn-navegacao {
+    padding: 0.7rem 1.2rem;
+    min-height: 48px;
+  }
+}
+
+/* Melhorias para dispositivos com notch */
+@media (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
+  .simulado-conteudo {
+    margin-top: max(0.5rem, env(safe-area-inset-top));
+    margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .painel-trilha {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .btn-voltar-inicio {
+    top: max(20px, env(safe-area-inset-top) + 10px);
+  }
+
+  .zoom-controls {
+    bottom: max(20px, env(safe-area-inset-bottom) + 10px);
+  }
+}
+
+/* Suporte para notch em dispositivos móveis */
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (max-width: 768px) {
+    .modal-simulado.ativo {
+      padding-top: max(0.5rem, env(safe-area-inset-top));
+      padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    }
+
+    .painel-trilha {
+      padding-top: max(1rem, env(safe-area-inset-top));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .btn-voltar-inicio {
+      top: max(20px, env(safe-area-inset-top) + 10px);
+    }
+  }
+}
+
+/* =============================================
+   MELHORIAS GERAIS DE LAYOUT
+   ============================================= */
+
+/* Garantir que o conteúdo não quebre o layout */
+.modal-conteudo,
+.simulado-conteudo {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Permite que o flex child encolha */
+}
+
+.modal-body,
+.simulado-body {
+  flex: 1;
+  min-height: 0; /* Permite que o flex child encolha */
+}
+
+/* =============================================
+   ÁREAS INTERATIVAS E HOVER
+   ============================================= */
+
+/* Container das áreas sobrepostas */
+.areas-sobrepostas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Área interativa base */
+.area-interativa {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Área desbloqueada tem z-index maior para receber hover */
+.area-interativa:not(.bloqueada) {
+  z-index: 10;
+}
+
+/* Imagem da área */
+.area-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  filter: grayscale(60%) brightness(0.8);
+}
+
+/* Área desbloqueada - cores mais vivas */
+.area-interativa:not(.bloqueada) .area-img {
+  filter: grayscale(0%) brightness(1.1) contrast(1.1);
+  opacity: 0.95;
+}
+
+/* Hover da área - apenas na imagem específica */
+.area-hover {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 15;
+  min-width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: none;
+  min-height: 100%;
+  gap: 3rem;
+  padding: 38px;
+}
+
+.area-nome {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 20px;
+  background: transparent;
+  color: transparent;
+  border-radius: 25px;
+  border: 2px solid transparent;
+  box-shadow: none;
+  margin: 0;
+  margin-bottom: auto;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-entrar-trilha {
+  background: transparent;
+  color: transparent;
+  border: 2px solid transparent;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: none;
+  pointer-events: auto;
+  white-space: nowrap;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Hover effects - destacar apenas o contorno visível da imagem */
+.area-interativa:hover .area-img {
+  opacity: 1;
+  transform: scale(1.05);
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))
+    drop-shadow(0 0 16px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.4));
+  transition: all 0.3s ease;
+}
+
+/* Efeito de contorno colorido por área */
+.area-coleta:hover .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(0, 123, 255, 0.8))
+    drop-shadow(0 0 16px rgba(0, 123, 255, 0.6))
+    drop-shadow(0 0 24px rgba(0, 123, 255, 0.4));
+}
+
+.area-triagem:hover .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(40, 167, 69, 0.8))
+    drop-shadow(0 0 16px rgba(40, 167, 69, 0.6))
+    drop-shadow(0 0 24px rgba(40, 167, 69, 0.4));
+}
+
+.area-estabilizacao:hover .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(220, 53, 69, 0.8))
+    drop-shadow(0 0 16px rgba(220, 53, 69, 0.6))
+    drop-shadow(0 0 24px rgba(220, 53, 69, 0.4));
+}
+
+.area-transporte:hover .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(253, 126, 20, 0.8))
+    drop-shadow(0 0 16px rgba(253, 126, 20, 0.6))
+    drop-shadow(0 0 24px rgba(253, 126, 20, 0.4));
+}
+
+.area-outros:hover .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(111, 66, 193, 0.8))
+    drop-shadow(0 0 16px rgba(111, 66, 193, 0.6))
+    drop-shadow(0 0 24px rgba(111, 66, 193, 0.4));
+}
+
+.area-interativa:hover .area-hover {
+  opacity: 1;
+}
+
+/* Hover geral removido - usando apenas cores específicas das áreas */
+
+/* Área bloqueada */
+.area-interativa.bloqueada {
+  pointer-events: none !important;
+  opacity: 0.3;
+  filter: grayscale(100%);
+  z-index: 1 !important;
+}
+
+.area-interativa.bloqueada .area-img {
+  filter: grayscale(100%) blur(1px);
+}
+
+/* Quando o mapa está focado, áreas bloqueadas mantêm o filtro padrão */
+.mapa-container.area-focada .area-interativa.bloqueada {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.mapa-container.area-focada .area-interativa.bloqueada .area-img {
+  filter: grayscale(100%) blur(1px);
+}
+
+/* Garantir que áreas bloqueadas não mostrem hover */
+.area-interativa.bloqueada:hover .area-hover {
+  opacity: 0 !important;
+}
+
+.area-interativa.bloqueada:hover .area-nome {
+  color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.area-interativa.bloqueada .btn-entrar-trilha {
+  display: none !important;
+}
+
+/* Área desbloqueando */
+.area-interativa.desbloqueando {
+  animation: desbloqueando 1.5s ease-in-out;
+}
+
+@keyframes desbloqueando {
+  0% {
+    opacity: 0.3;
+    filter: grayscale(100%);
+  }
+  50% {
+    opacity: 0.8;
+    filter: grayscale(50%);
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1);
+  }
+}
+
+/* Cores específicas das áreas - apenas no hover */
+.area-coleta:hover .area-nome {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%) !important;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(50px) !important;
+}
+
+.area-coleta:hover .btn-entrar-trilha {
+  background: #007bff !important;
+  color: white !important;
+  border-color: #007bff !important;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
+}
+
+.area-coleta:hover .btn-entrar-trilha:hover {
+  background: #0056b3 !important;
+  border-color: #0056b3 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5) !important;
+}
+
+.area-triagem:hover .area-nome {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%) !important;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(50px) !important;
+}
+
+.area-triagem:hover .btn-entrar-trilha {
+  background: #28a745 !important;
+  color: white !important;
+  border-color: #28a745 !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
+}
+
+.area-triagem:hover .btn-entrar-trilha:hover {
+  background: #20c997 !important;
+  border-color: #20c997 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5) !important;
+}
+
+.area-estabilizacao:hover .area-nome {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(50px) !important;
+}
+
+.area-estabilizacao:hover .btn-entrar-trilha {
+  background: #dc3545 !important;
+  color: white !important;
+  border-color: #dc3545 !important;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3) !important;
+}
+
+.area-estabilizacao:hover .btn-entrar-trilha:hover {
+  background: #c82333 !important;
+  border-color: #c82333 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.5) !important;
+}
+
+.area-transporte:hover .area-nome {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%) !important;
+  box-shadow: 0 6px 20px rgba(253, 126, 20, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(50px) !important;
+}
+
+.area-transporte:hover .btn-entrar-trilha {
+  background: #fd7e14 !important;
+  color: white !important;
+  border-color: #fd7e14 !important;
+  box-shadow: 0 4px 15px rgba(253, 126, 20, 0.3) !important;
+}
+
+.area-transporte:hover .btn-entrar-trilha:hover {
+  background: #e65100 !important;
+  border-color: #e65100 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(253, 126, 20, 0.5) !important;
+}
+
+.area-outros:hover .area-nome {
+  border-color: transparent !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%) !important;
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(50px) !important;
+}
+
+.area-outros:hover .btn-entrar-trilha {
+  background: #6f42c1 !important;
+  color: white !important;
+  border-color: #6f42c1 !important;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3) !important;
+}
+
+.area-outros:hover .btn-entrar-trilha:hover {
+  background: #5a2d91 !important;
+  border-color: #5a2d91 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.5) !important;
+}
+
+/* =============================================
+   CLASSES DAS TRILHAS E CORES DAS ÁREAS
+   ============================================= */
+
+/* Estado padrão do mapa */
+.mapa-container .mapa-img {
+  filter: grayscale(90%) blur(0px) brightness(1);
+  transition: filter 0.5s ease;
+}
+
+/* Quando uma área está focada - manter o mesmo grayscale consistente */
+.mapa-container.area-focada .mapa-img {
+  filter: grayscale(90%) blur(0px) brightness(1);
+}
+
+/* Efeito de spotlight na área selecionada será feito via overlay */
+
+/* Área ativa/selecionada quando painel está aberto - deve ficar colorida */
+.mapa-container.area-focada .area-interativa.area-ativa .area-img,
+.mapa-container.area-focada .area-interativa.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2) !important;
+  opacity: 1 !important;
+}
+
+/* Efeitos específicos por área quando selecionada */
+.mapa-container.area-focada .area-coleta.area-ativa .area-img,
+.mapa-container.area-focada .area-coleta.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(0, 123, 255, 0.8))
+    drop-shadow(0 0 16px rgba(0, 123, 255, 0.6)) !important;
+}
+
+.mapa-container.area-focada .area-triagem.area-ativa .area-img,
+.mapa-container.area-focada .area-triagem.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(40, 167, 69, 0.8))
+    drop-shadow(0 0 16px rgba(40, 167, 69, 0.6)) !important;
+}
+
+.mapa-container.area-focada .area-estabilizacao.area-ativa .area-img,
+.mapa-container.area-focada .area-estabilizacao.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(220, 53, 69, 0.8))
+    drop-shadow(0 0 16px rgba(220, 53, 69, 0.6)) !important;
+}
+
+.mapa-container.area-focada .area-transporte.area-ativa .area-img,
+.mapa-container.area-focada .area-transporte.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(253, 126, 20, 0.8))
+    drop-shadow(0 0 16px rgba(253, 126, 20, 0.6)) !important;
+}
+
+.mapa-container.area-focada .area-outros.area-ativa .area-img,
+.mapa-container.area-focada .area-outros.area-selecionada .area-img {
+  filter: grayscale(0%) brightness(1.2) contrast(1.2)
+    drop-shadow(0 0 8px rgba(111, 66, 193, 0.8))
+    drop-shadow(0 0 16px rgba(111, 66, 193, 0.6)) !important;
+}
+
+/* =============================================
+   ESTILIZAÇÃO DAS QUESTÕES DO SIMULADO
+   ============================================= */
+
+.questao {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #007bff;
+}
+
+.questao h4 {
+  color: #007bff;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.pergunta {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  font-weight: 500;
+}
+
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Reduzir padding do body quando for resultado */
+.simulado-body.resultado-modo {
+  padding: 1rem;
+  min-height: auto;
+}
+
+.simulado-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.simulado-footer.resultado-ativo {
+  justify-content: center;
+}
+
+.btn-navegacao,
+.btn-simulado {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-navegacao:hover,
+.btn-simulado:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-navegacao:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-anterior {
+  background: #6c757d;
+}
+
+.btn-anterior:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+.btn-proximo {
+  background: #007bff;
+}
+
+.btn-proximo:hover {
+  background: #0056b3;
+}
+
+#btnFinalizar,
+.btn-finalizar {
+  background: #28a745;
+}
+
+#btnFinalizar:hover,
+.btn-finalizar:hover {
+  background: #20c997;
+}
+
+.btn-proxima-area {
+  background: #28a745;
+}
+
+.btn-proxima-area:hover {
+  background: #20c997;
+}
+
+.btn-tente-novamente {
+  background: #dc3545;
+}
+
+.btn-tente-novamente:hover {
+  background: #c82333;
+}
+
+/* Resultado do simulado */
+.resultado-elegante {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.percentual-destaque {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 1.5rem;
+}
+
+.caixas-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.caixa-stat {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e9ecef;
+}
+
+.caixa-stat.acertos {
+  border-color: #28a745;
+  background: #f8fff9;
+}
+
+.caixa-stat.erros {
+  border-color: #dc3545;
+  background: #fff8f8;
+}
+
+.caixa-stat.respondidos {
+  border-color: #007bff;
+  background: #f8f9ff;
+}
+
+.stat-emoji {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-numero {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.caixa-stat.acertos .stat-numero {
+  color: #28a745;
+}
+
+.caixa-stat.erros .stat-numero {
+  color: #dc3545;
+}
+
+.caixa-stat.respondidos .stat-numero {
+  color: #007bff;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.mensagem-final {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Cores específicas por trilha nos modais */
+.modal-simulado.trilha-1 .simulado-header,
+.modal-video.trilha-1 .modal-header,
+.modal-video.trilha-1 .video-header {
+  background: #007bff;
+}
+
+.modal-simulado.trilha-2 .simulado-header,
+.modal-video.trilha-2 .modal-header,
+.modal-video.trilha-2 .video-header {
+  background: #28a745;
+}
+
+.modal-simulado.trilha-3 .simulado-header,
+.modal-video.trilha-3 .modal-header,
+.modal-video.trilha-3 .video-header {
+  background: #dc3545;
+}
+
+.modal-simulado.trilha-4 .simulado-header,
+.modal-video.trilha-4 .modal-header,
+.modal-video.trilha-4 .video-header {
+  background: #fd7e14;
+}
+
+.modal-simulado.trilha-5 .simulado-header,
+.modal-video.trilha-5 .modal-header,
+.modal-video.trilha-5 .video-header {
+  background: #6f42c1;
+}
+
+/* Botão de fechar */
+.btn-fechar {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.btn-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* =============================================
+   RESPONSIVIDADE PARA TELAS DE COMPUTADOR
+   ============================================= */
+
+/* Telas de Desktop Pequeno (769px - 1024px) - Foco em altura limitada */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 85%;
+    max-width: 700px;
+    max-height: 85vh;
+  }
+
+  .simulado-header {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .progresso {
+    font-size: 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .simulado-body {
+    padding: 1.2rem;
+    max-height: 55vh;
+    overflow-y: auto;
+  }
+
+  .modal-body {
+    padding: 1.2rem;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .questao-numero {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .questao-pergunta {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .opcoes-container {
+    gap: 0.6rem;
+  }
+
+  .opcao {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .btn-navegacao,
+  .btn-simulado {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+  }
+
+  .simulado-footer {
+    padding: 1rem;
+  }
+
+  .navegacao-questoes {
+    gap: 0.8rem;
+  }
+
+  .painel-trilha {
+    width: 380px;
+  }
+
+  .painel-trilha.trilha-5 {
+    left: -100%;
+  }
+
+  .painel-header {
+    padding: 1.2rem;
+  }
+
+  .painel-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .painel-conteudo {
+    padding: 1.2rem;
+  }
+
+  .info-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .info-item p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .btn-assistir-video {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Telas de Desktop Médio (1025px - 1440px) - Mais compacto */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 75%;
+    max-width: 800px;
+    max-height: 90vh;
+  }
+
+  .simulado-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .progresso {
+    font-size: 1rem;
+    gap: 0.8rem;
+  }
+
+  .simulado-body {
+    padding: 1.5rem;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .modal-body video {
+    max-height: 45vh;
+    width: 100%;
+    height: auto;
+  }
+
+  .questao-numero {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .questao-pergunta {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .opcoes-container {
+    gap: 0.8rem;
+  }
+
+  .opcao {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .btn-navegacao,
+  .btn-simulado {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+
+  .simulado-footer {
+    padding: 1.5rem;
+  }
+
+  .navegacao-questoes {
+    gap: 1rem;
+  }
+
+  .painel-trilha {
+    width: 450px;
+  }
+
+  .painel-trilha.trilha-4 {
+    left: -100%;
+  }
+
+  .painel-trilha.trilha-5 {
+    left: -100%;
+  }
+
+  .painel-header {
+    padding: 1.5rem;
+  }
+
+  .painel-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .painel-conteudo {
+    padding: 1.5rem;
+  }
+
+  .info-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .info-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .btn-assistir-video {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Telas de Desktop Grande (1441px+) */
+@media (min-width: 1441px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 70%;
+    max-width: 900px;
+    max-height: 85vh;
+  }
+
+  .simulado-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .progresso {
+    font-size: 1rem;
+    gap: 1rem;
+  }
+
+  .simulado-body {
+    padding: 2rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .modal-body {
+    padding: 2rem;
+    max-height: 55vh;
+    overflow-y: auto;
+  }
+
+  .modal-body video {
+    max-height: 40vh;
+    width: 100%;
+    height: auto;
+  }
+
+  .questao-numero {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .questao-pergunta {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .opcoes-container {
+    gap: 1rem;
+  }
+
+  .opcao {
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  .btn-navegacao,
+  .btn-simulado {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+
+  .simulado-footer {
+    padding: 1.5rem;
+  }
+
+  .navegacao-questoes {
+    gap: 1rem;
+  }
+
+  .painel-trilha {
+    width: 450px;
+  }
+
+  .painel-trilha.trilha-4 {
+    left: -100%;
+  }
+
+  .painel-trilha.trilha-5 {
+    left: -100%;
+  }
+
+  .painel-header {
+    padding: 1.5rem;
+  }
+
+  .painel-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .painel-conteudo {
+    padding: 1.5rem;
+  }
+
+  .info-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .info-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .btn-assistir-video {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Telas Ultra-wide (1921px+) */
+@media (min-width: 1921px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 50%;
+    max-width: 1400px;
+    max-height: none;
+  }
+
+  .simulado-header {
+    padding: 3rem 4rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 2.5rem;
+  }
+
+  .progresso {
+    font-size: 1.4rem;
+    gap: 2rem;
+  }
+
+  .simulado-body {
+    padding: 5rem;
+    max-height: none;
+  }
+
+  .modal-body {
+    padding: 5rem;
+    max-height: none;
+  }
+
+  .modal-body video {
+    max-height: none;
+  }
+
+  .questao-numero {
+    font-size: 1.8rem;
+    padding: 1.5rem 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .questao-pergunta {
+    font-size: 1.8rem;
+    line-height: 2;
+    margin-bottom: 4rem;
+  }
+
+  .opcoes-container {
+    gap: 2rem;
+  }
+
+  .opcao {
+    padding: 2.5rem 3rem;
+    font-size: 1.4rem;
+    border-radius: 20px;
+  }
+
+  .btn-navegacao,
+  .btn-simulado {
+    padding: 2rem 4rem;
+    font-size: 1.4rem;
+    border-radius: 40px;
+  }
+
+  .simulado-footer {
+    padding: 4rem;
+  }
+
+  .navegacao-questoes {
+    gap: 2.5rem;
+  }
+
+  .painel-trilha {
+    width: 600px;
+  }
+
+  .painel-trilha.trilha-4 {
+    left: -100%;
+  }
+
+  .painel-trilha.trilha-5 {
+    left: -100%;
+  }
+
+  .painel-header {
+    padding: 4rem;
+  }
+
+  .painel-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .painel-conteudo {
+    padding: 4rem;
+  }
+
+  .info-item {
+    margin-bottom: 4rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-item p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .btn-assistir-video {
+    padding: 2rem 4rem;
+    font-size: 1.4rem;
+  }
+}
+
+/* Telas com largura até 1280px e altura limitada */
+@media (max-width: 1280px) and (max-height: 800px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    width: 90%;
+    max-width: 650px;
+    max-height: 80vh;
+    margin: 1rem auto;
+  }
+
+  .simulado-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .simulado-header h3 {
+    font-size: 1rem;
+  }
+
+  .progresso {
+    font-size: 0.85rem;
+    gap: 0.4rem;
+  }
+
+  .simulado-body {
+    padding: 1rem;
+    max-height: 50vh;
+  }
+
+  .modal-body {
+    padding: 1rem;
+    max-height: 45vh;
+  }
+
+  .modal-body video {
+    max-height: 35vh;
+  }
+
+  .questao-numero {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .questao-pergunta {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  .opcoes-container {
+    gap: 0.5rem;
+  }
+
+  .opcao {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+  }
+
+  .btn-navegacao,
+  .btn-simulado {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 18px;
+  }
+
+  .simulado-footer {
+    padding: 0.8rem;
+  }
+}
+
+/* Para telas ainda menores ou com altura muito limitada */
+@media (max-width: 1280px) and (max-height: 720px) {
+  .modal-conteudo,
+  .simulado-conteudo {
+    max-height: 85vh;
+  }
+
+  .simulado-body {
+    max-height: 45vh;
+    padding: 0.8rem;
+  }
+
+  .modal-body {
+    max-height: 40vh;
+    padding: 0.8rem;
+  }
+
+  .modal-body video {
+    max-height: 30vh;
+  }
+
+  .questao-pergunta {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .opcao {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .simulado-footer {
+    padding: 0.6rem;
+  }
+
+  .btn-navegacao {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVIDADE DO ZOOM
+   ============================================= */
+
+/* Responsividade do zoom para mobile */
+@media (max-width: 768px) {
+  .mapa-container.zoom-trilha-1 .mapa-img,
+  .mapa-container.zoom-trilha-1 .areas-sobrepostas {
+    transform: scale(2) !important;
+    transform-origin: 13.2% 8.8%;
+    animation: zoomInArea 1s ease-out forwards;
+  }
+
+  .mapa-container.zoom-trilha-2 .mapa-img,
+  .mapa-container.zoom-trilha-2 .areas-sobrepostas {
+    transform: scale(2.2) !important;
+    transform-origin: 23.8% 28.8%;
+    animation: zoomInArea 1s ease-out forwards;
+  }
+
+  .mapa-container.zoom-trilha-3 .mapa-img,
+  .mapa-container.zoom-trilha-3 .areas-sobrepostas {
+    transform: scale(2.4) !important;
+    transform-origin: 46.9% 51.3%;
+    animation: zoomInArea 1s ease-out forwards;
+  }
+
+  .mapa-container.zoom-trilha-4 .mapa-img,
+  .mapa-container.zoom-trilha-4 .areas-sobrepostas {
+    transform: scale(2.1) !important;
+    transform-origin: 81.3% 27.9%;
+    animation: zoomInArea 1s ease-out forwards;
+  }
+
+  .mapa-container.zoom-trilha-5 .mapa-img,
+  .mapa-container.zoom-trilha-5 .areas-sobrepostas {
+    transform: scale(2.3) !important;
+    transform-origin: 54.6% 84.3%;
+    animation: zoomInArea 1s ease-out forwards;
+  }
+
+  .zoom-controls {
+    bottom: 80px !important;
+    right: 15px !important;
+  }
+
+  .zoom-btn,
+  .zoom-reset {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 16px !important;
+  }
+
+  .zoom-indicator {
+    top: 15px;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+/* =============================================
+   PÁGINA MAPA FINALIZADO
+   ============================================= */
+
+/* Container principal do mapa finalizado */
+.mapa-finalizado .mapa-img {
+  filter: grayscale(0%) brightness(1.1) contrast(1.1) saturate(1.2) !important;
+  transition: filter 0.3s ease;
+}
+
+/* Remover grayscale completamente na página finalizada */
+.mapa-finalizado .mapa-img.mapa-colorida {
+  filter: none !important;
+}
+
+/* Garantir que o mapa colorido seja sempre colorido */
+.mapa-finalizado .mapa-img.mapa-colorida,
+.mapa-container.mapa-finalizado .mapa-img {
+  filter: grayscale(0%) brightness(1.1) contrast(1.1) saturate(1.2) !important;
+}
+
+/* Remover qualquer efeito hover no mapa finalizado */
+.mapa-finalizado .mapa-img:hover {
+  filter: grayscale(0%) brightness(1.1) contrast(1.1) saturate(1.2) !important;
+}
+
+/* Botões das áreas no mapa finalizado */
+.areas-finalizadas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.botao-area {
+  position: absolute;
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #333;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+.botao-area:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.botao-area.ativo {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border-width: 4px;
+}
+
+/* Cores específicas para cada área */
+.botao-area.area-coleta-btn,
+.botao-area[data-area="coleta"] {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.botao-area.area-triagem-btn,
+.botao-area[data-area="triagem"] {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.botao-area.area-estabilizacao-btn,
+.botao-area[data-area="estabilizacao"] {
+  background: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.botao-area.area-transporte-btn,
+.botao-area[data-area="transporte"] {
+  background: #fd7e14;
+  color: white;
+  border-color: #fd7e14;
+}
+
+.botao-area.area-outros-btn,
+.botao-area[data-area="outros"] {
+  background: #6f42c1;
+  color: white;
+  border-color: #6f42c1;
+}
+
+/* Indicador de cor para cada botão */
+.botao-area-cor {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.area-coleta-cor {
+  background: #007bff;
+}
+
+.area-triagem-cor {
+  background: #28a745;
+}
+
+.area-estabilizacao-cor {
+  background: #dc3545;
+}
+
+.area-transporte-cor {
+  background: #fd7e14;
+}
+
+.area-outros-cor {
+  background: #6f42c1;
+}
+
+/* Container do botão finalizar */
+.finalizar-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.btn-finalizar-simulador {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-finalizar-simulador:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.6);
+  background: #20c997;
+}
+
+.btn-finalizar-simulador:active {
+  transform: translateY(-1px);
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 768px) {
+  .botao-area {
+    min-width: 100px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .btn-finalizar-simulador {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .finalizar-container {
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .botao-area {
+    min-width: 80px;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .btn-finalizar-simulador {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

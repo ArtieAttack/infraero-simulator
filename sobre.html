@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Sobre o Simulador | INFRAERO</title>
+    <link rel="stylesheet" href="css/modern-layout.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      .page-container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .page-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        margin-bottom: 2rem;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .page-subtitle {
+        font-size: 1.2rem;
+        font-weight: 400;
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .page-content {
+        flex: 1;
+        padding: 0 2rem 2rem;
+        overflow-y: auto;
+      }
+
+      .area-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all var(--transition-speed) ease;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .area-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .area-icon {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+        background-color: rgba(50, 115, 220, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        color: var(--primary-color);
+      }
+
+      .area-icon i {
+        font-size: 2.5rem;
+      }
+
+      .area-info {
+        flex: 1;
+      }
+
+      .area-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .area-desc {
+        color: var(--text-color);
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+      }
+
+      .area-stats {
+        display: flex;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+
+      .area-stat {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .area-stat i {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .difficulty-indicator {
+        display: flex;
+        align-items: center;
+      }
+
+      .difficulty-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        margin-right: 3px;
+        opacity: 0.3;
+      }
+
+      .difficulty-dot.active {
+        opacity: 1;
+      }
+
+      .intro-text {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-md);
+        line-height: 1.8;
+      }
+
+      .intro-text p {
+        margin-bottom: 1rem;
+      }
+
+      .intro-text p:last-child {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 768px) {
+        .area-card {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .area-icon {
+          margin: 0 0 1rem 0;
+        }
+
+        .area-stats {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botão de menu mobile -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay para fechar sidebar -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <div class="main-container">
+      <!-- Sidebar com conteúdo simplificado -->
+      <aside class="sidebar">
+        <div class="sidebar-title">Sobre o Simulador</div>
+
+        <div class="sidebar-content">
+          <div class="sidebar-section">
+            <p>
+              <strong>Triagem e Cuidados Médicos: Simulador Operacional</strong>
+            </p>
+            <p>
+              Bem-vindo(a) ao Simulador operacional: Triagem e Cuidados Médicos!
+            </p>
+            <p>
+              Em incidentes com múltiplas vítimas, é essencial que os feridos
+              passem por áreas estratégicas de atendimento. Neste ambiente, você
+              vai conhecer as principais áreas de atuação em situações de
+              emergência após um acidente aéreo.
+            </p>
+            <p>
+              Para navegar, explore cada cenário clicando nos elementos
+              destacados. Você também encontrará vídeos, questões interativas e
+              instruções importantes de cada etapa.
+            </p>
+            <p>
+              <strong>Atenção:</strong> Para avançar no simulador, é necessário
+              visualizar todas as áreas e concluir todas as interações.
+            </p>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Áreas de Treinamento</h3>
+            <ul class="sidebar-list">
+              <li>
+                Área de Coleta (Área quente) - Recepção e estabilização inicial
+              </li>
+              <li>
+                Área de Triagem (Área morna) - Classificação por prioridade
+              </li>
+              <li>
+                Área de Assistência/Estabilização (Área fria) - Cuidados e
+                observação
+              </li>
+              <li>Área de Transporte - Registro e evacuação</li>
+              <li>Outras Áreas - Vítimas fatais e heliponto</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <p>
+              Cada módulo combina conteúdo teórico em vídeo com avaliações
+              práticas para consolidar o aprendizado.
+            </p>
+          </div>
+
+          <div class="sidebar-highlight">
+            <p>
+              <strong>Objetivo:</strong> Desenvolver competências técnicas e
+              procedimentais para resposta eficaz em emergências aeroportuárias.
+            </p>
+          </div>
+
+          <div class="sidebar-button-container">
+            <a href="como-funciona.html" class="btn btn-accent">Próximo</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Conteúdo principal -->
+      <main class="main-content">
+        <div class="page-with-bg">
+          <img
+            src="assets/images/campo.jpg"
+            alt="Campo de Operações"
+            class="bg-image"
+          />
+          <div class="overlay"></div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Função para toggle da sidebar em mobile
+      function toggleSidebar() {
+        const sidebar = document.querySelector(".sidebar");
+        const overlay = document.querySelector(".sidebar-overlay");
+        
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+      
+      // Função para fechar sidebar
+      function closeSidebar() {
+        const sidebar = document.querySelector(".sidebar");
+        const overlay = document.querySelector(".sidebar-overlay");
+        
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener("click", function (e) {
+        const sidebar = document.querySelector(".sidebar");
+        const menuToggle = document.querySelector(".menu-toggle");
+
+        if (
+          window.innerWidth <= 992 &&
+          !sidebar.contains(e.target) &&
+          !menuToggle.contains(e.target) &&
+          sidebar.classList.contains("active")
+        ) {
+          closeSidebar();
+        }
+      });
+      
+      // Fechar sidebar ao clicar em links
+      const sidebarLinks = document.querySelectorAll('.sidebar a');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+      });
+      
+      // Prevenir zoom duplo em mobile
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function(e) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          e.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+
+      // Adiciona efeitos de hover e animação aos cartões de área
+      document.querySelectorAll(".area-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-5px)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0)";
+        });
+      });
+    </script>
+  </body>
+</html>

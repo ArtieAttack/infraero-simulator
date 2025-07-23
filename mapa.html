@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Mapa Interativo</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="mapa-container">
+      <!-- Botão para retornar à página inicial -->
+      <a href="index.html" class="btn-voltar-inicio">← Voltar</a>
+
+      <img
+        src="assets/images/campo.jpg"
+        alt="Mapa do Simulador"
+        class="mapa-img"
+      />
+
+      <!-- Áreas Interativas Sobrepostas -->
+      <div class="areas-sobrepostas">
+        <!-- Área de Coleta (disponível desde o início) -->
+        <div
+          class="area-interativa area-coleta"
+          data-area="coleta"
+          data-trilha="1"
+          style="top: 0%; left: 0%; width: 100%; height: 100%"
+        >
+          <img
+            src="assets/images/areas/coleta.png"
+            alt="Área de Coleta"
+            class="area-img"
+          />
+          <div class="area-hover">
+            <span class="area-nome">Área de Coleta</span>
+            <button
+              type="button"
+              class="btn-entrar-trilha"
+              data-trilha="1"
+              data-area="coleta"
+            >
+              Entrar na Trilha
+            </button>
+          </div>
+        </div>
+
+        <!-- Área de Triagem (bloqueada inicialmente) -->
+        <div
+          class="area-interativa area-triagem bloqueada"
+          data-area="triagem"
+          ``
+          data-trilha="2"
+          style="top: 0%; left: 0%; width: 100%; height: 100%"
+        >
+          <img
+            src="assets/images/areas/triagem.png"
+            alt="Área de Triagem"
+            class="area-img"
+          />
+          <div class="area-hover">
+            <span class="area-nome">Área de Triagem</span>
+            <button
+              type="button"
+              class="btn-entrar-trilha"
+              data-trilha="2"
+              data-area="triagem"
+            >
+              Entrar na Trilha
+            </button>
+          </div>
+        </div>
+
+        <!-- Área de Estabilização (bloqueada inicialmente) -->
+        <div
+          class="area-interativa area-estabilizacao bloqueada"
+          data-area="estabilizacao"
+          data-trilha="3"
+          style="top: 0%; left: 0%; width: 100%; height: 100%"
+        >
+          <img
+            src="assets/images/areas/estabilizacao.png"
+            alt="Área de Estabilização"
+            class="area-img"
+          />
+          <div class="area-hover">
+            <span class="area-nome">Área de Estabilização</span>
+            <button
+              type="button"
+              class="btn-entrar-trilha"
+              data-trilha="3"
+              data-area="estabilizacao"
+            >
+              Entrar na Trilha
+            </button>
+          </div>
+        </div>
+
+        <!-- Área de Transporte (bloqueada inicialmente) -->
+        <div
+          class="area-interativa area-transporte bloqueada"
+          data-area="transporte"
+          data-trilha="4"
+          style="top: 0%; left: 0%; width: 100%; height: 100%"
+        >
+          <img
+            src="assets/images/areas/transporte.png"
+            alt="Área de Transporte"
+            class="area-img"
+          />
+          <div class="area-hover">
+            <span class="area-nome">Área de Transporte</span>
+            <button
+              type="button"
+              class="btn-entrar-trilha"
+              data-trilha="4"
+              data-area="transporte"
+            >
+              Entrar na Trilha
+            </button>
+          </div>
+        </div>
+
+        <!-- Outras Áreas (bloqueada inicialmente) -->
+        <div
+          class="area-interativa area-outros bloqueada"
+          data-area="outros"
+          data-trilha="5"
+          style="top: 0%; left: 0%; width: 100%; height: 100%"
+        >
+          <img
+            src="assets/images/areas/outros.png"
+            alt="Outras Áreas"
+            class="area-img"
+          />
+          <div class="area-hover">
+            <span class="area-nome">Outras Áreas</span>
+            <button
+              type="button"
+              class="btn-entrar-trilha"
+              data-trilha="5"
+              data-area="outros"
+            >
+              Entrar na Trilha
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles de Zoom -->
+      <div class="zoom-controls">
+        <button type="button" class="zoom-btn" id="zoomIn">+</button>
+        <button type="button" class="zoom-btn" id="zoomOut">-</button>
+        <button type="button" class="zoom-reset" id="zoomReset">↻</button>
+      </div>
+
+      <!-- Indicador de Zoom -->
+      <div class="zoom-indicator" id="zoomIndicator">
+        🔍 Focalizando área...
+      </div>
+
+      <!-- Botão Voltar Overview -->
+      <div class="voltar-overview-controls">
+        <button type="button" class="btn-voltar-mapa" id="voltarOverview">
+          ← VOLTAR
+        </button>
+      </div>
+
+      <!-- Painel lateral de informações -->
+      <div class="painel-trilha" id="painelTrilha">
+        <div class="painel-header">
+          <h2 id="trilhaTitulo">Área de Triagem</h2>
+          <button type="button" class="btn-fechar" id="fecharPainel"></button>
+        </div>
+
+        <div class="painel-conteudo">
+          <div class="trilha-info">
+            <div class="info-item">
+              <h3>Objetivo</h3>
+              <p id="trilhaObjetivo">
+                Classificar vítimas de acordo com a gravidade de suas lesões.
+              </p>
+            </div>
+
+            <div class="info-item">
+              <div class="trilha-imagem">
+                <img
+                  id="trilhaImagem"
+                  src="assets/images/campo.jpg"
+                  alt="Imagem da área"
+                />
+              </div>
+            </div>
+
+            <div class="info-item">
+              <h3>Descrição</h3>
+              <p id="trilhaDescricao">
+                A Área de Triagem está localizada a aproximadamente 90 metros do
+                acidente, levando em consideração a direção do vento para evitar
+                a contaminação. É aqui que as vítimas são classificadas de
+                acordo com a gravidade de suas lesões. Em casos de insegurança
+                no local, a triagem pode ser adiada.
+              </p>
+            </div>
+          </div>
+
+          <div class="painel-acoes">
+            <button type="button" class="btn-assistir-video" id="assistirVideo">
+              <span class="icone-play">▶</span> ASSISTIR VÍDEO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Vídeo -->
+    <div id="modalVideo" class="modal-video">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h3 id="videoTitulo">Vídeo Educativo</h3>
+          <button
+            type="button"
+            class="btn-fechar-modal"
+            id="btnFecharModalVideo"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="videoContainer" class="video-container">
+            <video id="videoPlayer" controls style="display: none">
+              <source src="" type="video/mp4" />
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
+            <iframe
+              id="youtubePlayer"
+              width="100%"
+              src=""
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="display: none"
+            >
+            </iframe>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn-iniciar-simulado"
+            id="btnIniciarSimulado"
+          >
+            INICIAR SIMULADO
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Simulado -->
+    <div id="modalSimulado" class="modal-simulado">
+      <div class="simulado-conteudo">
+        <div class="simulado-header">
+          <h3 id="simuladoTitulo">Simulado</h3>
+          <div class="progresso">
+            <span id="questaoAtual">1</span>/<span id="totalQuestoes">5</span>
+          </div>
+          <button
+            type="button"
+            class="btn-fechar-simulado"
+            id="btnFecharSimuladoHeader"
+          ></button>
+        </div>
+        <div class="simulado-body">
+          <div class="questao" id="questaoContainer">
+            <h4>Questão <span id="numeroQuestao">1</span></h4>
+            <div class="pergunta" id="perguntaTexto"></div>
+            <div class="opcoes" id="opcoesContainer"></div>
+          </div>
+          <div class="resultado" id="resultadoContainer" style="display: none">
+            <div class="pontuacao" id="pontuacaoFinal"></div>
+          </div>
+        </div>
+        <div class="simulado-footer">
+          <div class="navegacao-esquerda">
+            <button
+              type="button"
+              class="btn-navegacao btn-anterior"
+              id="btnAnterior"
+              disabled
+            >
+              Anterior
+            </button>
+          </div>
+          <div class="navegacao-direita">
+            <button
+              type="button"
+              class="btn-navegacao btn-proximo"
+              id="btnProximo"
+            >
+              Próximo
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-finalizar"
+              id="btnFinalizar"
+              style="display: none"
+            >
+              Finalizar
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-proxima-area"
+              id="btnProximaArea"
+              style="display: none"
+            >
+              Próxima Área
+            </button>
+            <button
+              type="button"
+              class="btn-navegacao btn-tente-novamente"
+              id="btnTenteNovamente"
+              style="display: none"
+            >
+              Tente Novamente
+            </button>
+            <button
+              type="button"
+              class="btn-fechar-texto"
+              id="btnFecharSimulado"
+              style="display: none"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,357 @@
+/* =============================================
+   ESTILOS ESPECÍFICOS PARA MAPA FINALIZADO
+   ============================================= */
+
+/* Container principal do mapa finalizado .mapa-finalizado .btn-finalizar-simulador:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(32, 201, 151, 0.4), 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #17a085;
+}mapa-finalizado {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+/* Imagem do mapa - SEMPRE colorida */
+.mapa-finalizado .mapa-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none !important; /* Nunca aplicar grayscale */
+}
+
+/* Container das áreas finalizadas */
+.areas-finalizadas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* Botões das áreas - DESIGN MODERNO E BONITO */
+.mapa-finalizado .botao-area {
+  position: absolute;
+  width: 160px;
+  height: 55px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.85)
+  );
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  color: #333;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Cores específicas dos botões - CORES SÓLIDAS */
+.mapa-finalizado .area-coleta-btn {
+  background: #007bff;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mapa-finalizado .area-triagem-btn {
+  background: #28a745;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mapa-finalizado .area-estabilizacao-btn {
+  background: #dc3545;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mapa-finalizado .area-transporte-btn {
+  background: #fd7e14;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mapa-finalizado .area-outros-btn {
+  background: #6f42c1;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeitos hover APENAS quando visíveis - MAIS BONITOS */
+.mapa-finalizado:not(.area-focada) .botao-area:hover {
+  transform: translate(-50%, -50%) scale(1.08) translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.mapa-finalizado:not(.area-focada) .botao-area:active {
+  transform: translate(-50%, -50%) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+/* ESCONDER BOTÕES DURANTE O ZOOM */
+.mapa-finalizado.area-focada .areas-finalizadas {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mapa-finalizado.area-focada .botao-area {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Texto do botão */
+.botao-area-texto {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Botão voltar - mesmo design do mapa.html */
+.mapa-finalizado .btn-voltar-inicio {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.mapa-finalizado .btn-voltar-inicio:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Botão Finalizar Simulador - DESIGN MODERNO E BONITO */
+.finalizar-simulador-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mapa-finalizado .btn-finalizar-simulador {
+  background: #20c997;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 20px rgba(32, 201, 151, 0.3), 0 3px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.mapa-finalizado .btn-finalizar-simulador::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.mapa-finalizado .btn-finalizar-simulador:hover::before {
+  left: 100%;
+}
+
+.mapa-finalizado .btn-finalizar-simulador:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(32, 201, 151, 0.4),
+    0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #17a085;
+}
+
+/* ESCONDER BOTÃO FINALIZAR DURANTE O ZOOM */
+.mapa-finalizado.area-focada .finalizar-simulador-controls {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Indicador de zoom - ESCONDIDO na página finalizada */
+.mapa-finalizado .zoom-indicator {
+  display: none !important;
+}
+
+/* Efeito especial para botão ativo */
+.mapa-finalizado .botao-area.ativo {
+  animation: pulseGlow 2s infinite;
+  border-width: 3px;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2),
+      0 0 0 4px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Responsividade - mantendo o design bonito */
+@media (max-width: 1024px) {
+  .mapa-finalizado .botao-area {
+    width: 140px;
+    height: 50px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mapa-finalizado .botao-area {
+    width: 120px;
+    height: 45px;
+    font-size: 11px;
+    border-radius: 12px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio,
+  .mapa-finalizado .btn-finalizar-simulador {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+
+  .finalizar-simulador-controls {
+    top: 15px;
+    right: 15px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio {
+    top: 15px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mapa-finalizado .botao-area {
+    width: 100px;
+    height: 40px;
+    font-size: 10px;
+    border-radius: 10px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio,
+  .mapa-finalizado .btn-finalizar-simulador {
+    padding: 8px 14px;
+    font-size: 0.7rem;
+    border-radius: 8px;
+  }
+
+  .finalizar-simulador-controls {
+    top: 10px;
+    right: 10px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio {
+    top: 10px;
+    left: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mapa-finalizado .botao-area {
+    width: 85px;
+    height: 35px;
+    font-size: 9px;
+    border-radius: 8px;
+    padding: 2px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio,
+  .mapa-finalizado .btn-finalizar-simulador {
+    padding: 6px 12px;
+    font-size: 0.65rem;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 320px) {
+  .mapa-finalizado .botao-area {
+    width: 75px;
+    height: 32px;
+    font-size: 8px;
+    border-radius: 6px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio,
+  .mapa-finalizado .btn-finalizar-simulador {
+    padding: 5px 10px;
+    font-size: 0.6rem;
+    border-radius: 5px;
+  }
+  
+  .finalizar-simulador-controls {
+    top: 8px;
+    right: 8px;
+  }
+
+  .mapa-finalizado .btn-voltar-inicio {
+    top: 8px;
+    left: 8px;
+  }
+}
+
+/* Otimizações para touch devices */
+@media (max-width: 768px) {
+  .mapa-finalizado .botao-area {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .mapa-finalizado .btn-voltar-inicio,
+  .mapa-finalizado .btn-finalizar-simulador {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+}

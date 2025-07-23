@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Como Funciona | Simulador INFRAERO</title>
+  <link rel="stylesheet" href="css/modern-layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .page-container {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .page-subtitle {
+      font-size: 1.2rem;
+      font-weight: 400;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-content {
+      flex: 1;
+      padding: 0 2rem 2rem;
+      overflow-y: auto;
+    }
+
+    .step-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .step-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      overflow: hidden;
+      transition: all var(--transition-speed) ease;
+      position: relative;
+    }
+
+    .step-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-number {
+      background-color: var(--primary-color);
+      color: white;
+      width: 80px;
+      min-width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .step-content {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .step-icon {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .feature-list {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .feature-item:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      background-color: rgba(50, 115, 220, 0.1);
+      color: var(--primary-color);
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+    }
+
+    .feature-info {
+      flex: 1;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .tips-box {
+      background-color: rgba(245, 166, 35, 0.1);
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      margin: 2rem 0;
+    }
+
+    .tips-title {
+      color: var(--accent-color);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .tips-title i {
+      margin-right: 0.5rem;
+    }
+
+    .tips-list {
+      margin: 0;
+      padding: 0 0 0 1.5rem;
+    }
+
+    .tips-list li {
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .tips-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .navigation-flow {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .flow-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .flow-step {
+      flex: 1;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child):after {
+      content: "→";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .flow-icon {
+      background-color: var(--primary-color);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .flow-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .step-card {
+        flex-direction: column;
+      }
+
+      .step-number {
+        width: 100%;
+        height: 60px;
+      }
+
+      .flow-diagram {
+        flex-direction: column;
+      }
+
+      .flow-step {
+        margin-bottom: 1rem;
+      }
+
+      .flow-step:not(:last-child):after {
+        content: "↓";
+        position: absolute;
+        right: 50%;
+        top: auto;
+        bottom: -20px;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+</head>  <body>
+    <!-- Botão de menu mobile -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay para fechar sidebar -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+    
+    <div class="main-container">
+    <!-- Sidebar com conteúdo simplificado -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Como Funciona</div>
+      
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <p>Siga as instruções para navegar pelas áreas de forma segura e organizada:</p>
+          <ul class="sidebar-list sidebar-steps">
+            <li>Clique na área habilitada do cenário interativo.</li>
+            <li>Leia atentamente a explicação sobre o funcionamento daquela área.</li>
+            <li>Assista ao vídeo explicativo para entender as ações práticas.</li>
+            <li>Responda ao Quiz para testar seu conhecimento.</li>
+            <li>Avance para a próxima área: as demais áreas só serão desbloqueadas após a conclusão da atual.</li>
+          </ul>
+        </div>
+        
+        <div class="sidebar-highlight">
+          <p><strong>Progresso passo a passo:</strong> Complete todas as etapas para dominar o fluxo de resposta a emergências!</p>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+      <div class="page-with-bg">
+        <img src="assets/images/campo.jpg" alt="Campo de Operações" class="bg-image">
+        <div class="overlay"></div>
+        
+        <div class="centered-content" style="color: white; text-align: center;">
+          <h1 style="font-size: 3rem;">Pronto para Começar?</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem;">Você conhece o simulador e como funciona. <br/> Agora é hora de iniciar as trilhas!</p>
+
+          <a href="mapa.html" class="btn btn-lg" style="font-size: 1.2rem; padding: 1.2rem 3rem; background: #f5a623; border: none;">Iniciar Trilha</a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    // Função para toggle da sidebar em mobile
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+    
+    // Função para fechar sidebar
+    function closeSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
+      
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+    
+    // Fechar sidebar ao clicar fora dela em mobile
+    document.addEventListener('click', function(e) {
+      const sidebar = document.querySelector('.sidebar');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (window.innerWidth <= 992 && 
+          !sidebar.contains(e.target) && 
+          !menuToggle.contains(e.target) &&
+          sidebar.classList.contains('active')) {
+        closeSidebar();
+      }
+    });
+    
+    // Fechar sidebar ao clicar em links
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+    
+    // Prevenir zoom duplo em mobile
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
+</body>
+</html>

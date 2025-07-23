@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mapeador de Áreas</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      touch-action: none;
+    }
+    #mapa {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      cursor: crosshair;
+    }
+    .ponto {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    
+    /* Responsividade Mobile */
+    @media (max-width: 768px) {
+      #mapa {
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      
+      .ponto {
+        width: 15px;
+        height: 15px;
+        z-index: 10;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .ponto {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img id="mapa" src="/assets/images/campo.jpg" alt="Mapa" />
+  <script>
+    const img = document.getElementById("mapa");
+
+    function handleClick(e) {
+      const rect = img.getBoundingClientRect();
+      const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+      const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+
+      console.log(`{ x: ${xPercent.toFixed(1)}%, y: ${yPercent.toFixed(1)}% }`);
+
+      // Marcar visualmente
+      const ponto = document.createElement("div");
+      ponto.classList.add("ponto");
+      ponto.style.left = `${xPercent}%`;
+      ponto.style.top = `${yPercent}%`;
+      document.body.appendChild(ponto);
+    }
+
+    // Suporte para desktop
+    img.addEventListener("click", handleClick);
+    
+    // Suporte para mobile/touch
+    img.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = img.getBoundingClientRect();
+      const xPercent = ((touch.clientX - rect.left) / rect.width) * 100;
+      const yPercent = ((touch.clientY - rect.top) / rect.height) * 100;
+
+      console.log(`{ x: ${xPercent.toFixed(1)}%, y: ${yPercent.toFixed(1)}% }`);
+
+      // Marcar visualmente
+      const ponto = document.createElement("div");
+      ponto.classList.add("ponto");
+      ponto.style.left = `${xPercent}%`;
+      ponto.style.top = `${yPercent}%`;
+      document.body.appendChild(ponto);
+    });
+    
+    // Prevenir comportamento padrão do touch
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+  </script>
+</body>
+</html>
